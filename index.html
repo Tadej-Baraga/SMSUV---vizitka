@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shoti pros – prototip</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&display=swap">
+<style>
+:root{--ink:#1a1535;--bg:#f4f2fb;--surface:#ffffff;--muted:#554f75;--accent:#7a3cff;--on-accent:#ffffff;--lime:#b6ff3b;--line:#d9d4ee;--hero:#0d0b1a;--on-hero:#ffffff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--ink:#ece9fb;--bg:#0d0b1a;--surface:#181530;--muted:#a9a3cc;--accent:#b6ff3b;--on-accent:#0d0b1a;--line:#2d2852}}
+:root[data-theme="dark"]{color-scheme:dark;--ink:#ece9fb;--bg:#0d0b1a;--surface:#181530;--muted:#a9a3cc;--accent:#b6ff3b;--on-accent:#0d0b1a;--line:#2d2852}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,.logo{font-family:"Chakra Petch",system-ui,sans-serif;line-height:1.1;margin:0 0 .5em;letter-spacing:.01em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);position:relative;background:var(--surface)}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;padding-top:14px;padding-bottom:14px}
+.logo{font-weight:700;font-size:1.35rem;text-decoration:none;text-transform:uppercase;margin:0}
+.logo span{color:var(--accent)}
+nav{display:flex;flex-wrap:wrap;gap:4px 22px}
+nav a{text-decoration:none;font-weight:600;padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a[aria-current]{border-bottom-color:var(--accent)}
+.menu summary{display:none}
+.hero{background:var(--hero);color:var(--on-hero);position:relative;overflow:hidden;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px}
+.hero .wrap{padding-top:64px;padding-bottom:72px;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.4rem,8vw,4.6rem);max-width:12ch;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p{max-width:46ch;font-size:1.15rem;opacity:.9}
+.pad{position:absolute;right:-30px;bottom:-30px;width:min(420px,70vw);opacity:.9}
+.btn{display:inline-block;background:var(--lime);color:#0d0b1a;font-weight:700;text-decoration:none;padding:12px 24px;border-radius:6px;margin:8px 8px 0 0;border:2px solid var(--lime);transition:background .2s,color .2s,transform .2s}
+.btn:hover,.btn:focus-visible{background:transparent;color:var(--lime);transform:translateY(-2px)}
+.btn.alt{background:transparent;color:var(--on-hero);border-color:var(--on-hero)}
+.btn.alt:hover,.btn.alt:focus-visible{background:var(--on-hero);color:#0d0b1a}
+.contact .btn,.intro .btn{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.contact .btn:hover,.contact .btn:focus-visible,.intro .btn:hover,.intro .btn:focus-visible{background:transparent;color:var(--accent)}
+section{padding:56px 0}
+.intro p{max-width:62ch;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px;transition:border-color .2s}
+.card:hover,.card:focus-within{border-color:var(--accent)}
+.card h3{font-size:1.3rem}
+.card p{margin:0;color:var(--muted)}
+.card .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.card .more>div{overflow:hidden}
+.card .more p{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.card:hover .more,.card:focus-within .more{grid-template-rows:1fr}
+@media (hover:none){.card .more{grid-template-rows:1fr}}
+.contact{background:var(--surface);border-top:1px solid var(--line)}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin:0 0 20px}
+.contact dt{font-weight:600}.contact dd{margin:0;color:var(--muted)}
+.js .page{display:none}.js .page.active{display:block}
+.wide{max-width:none;padding:0 clamp(16px,4vw,56px)}
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:border-color .2s,transform .2s}
+.post:hover,.post:focus-visible{border-color:var(--accent);transform:translateY(-3px)}
+.post .thumb{height:130px;background:linear-gradient(135deg,#7a3cff,#b6ff3b)}
+.post:nth-child(2) .thumb{background:linear-gradient(135deg,#0d0b1a,#7a3cff)}
+.post:nth-child(3) .thumb{background:linear-gradient(135deg,#b6ff3b,#0d0b1a)}
+.post .body{padding:20px}
+.post .meta{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;color:var(--muted);font-size:.9rem;margin-bottom:8px}
+.tag{border:1px solid var(--accent);border-radius:99px;padding:1px 10px;font-weight:600;color:var(--ink)}
+.post h3{font-size:1.3rem}
+.post p{margin:0 0 12px;color:var(--muted)}
+.post .go{font-weight:600;color:var(--accent)}
+.post.featured{grid-column:1/-1}
+@media (min-width:700px){.post.featured{display:grid;grid-template-columns:2fr 3fr}.post.featured .thumb{height:auto;min-height:220px}.post.featured h3{font-size:1.8rem}}
+@media (prefers-reduced-motion:reduce){.post{transition:none}.post:hover,.post:focus-visible{transform:none}}
+.wide .cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+@media (min-width:601px){.wide .card{padding:36px 32px;min-height:260px}.wide .card h3{font-size:1.6rem}.wide .card p{font-size:1.1rem}}
+footer{padding:20px 0;color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.btn,.card,.card .more{transition:none}.btn:hover,.btn:focus-visible{transform:none}}
+@media (max-width:600px){
+.wrap{padding:0 16px}
+header .wrap{padding-top:10px;padding-bottom:10px}
+.menu summary{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 6px;font-weight:600;cursor:pointer;list-style:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary::before{content:"\2630";font-size:1.3rem}
+.menu[open] summary::before{content:"\2715"}
+nav{position:absolute;left:0;right:0;top:100%;z-index:10;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 16px 12px}
+nav a{padding:14px 4px;min-height:48px;border-bottom:1px solid var(--line)}
+.hero .wrap{padding-top:40px;padding-bottom:150px}
+.pad{width:300px;right:-40px;bottom:-40px}
+section{padding:36px 0}
+.btn{display:block;text-align:center;padding:15px 20px;min-height:48px;margin-right:0}
+.card{padding:20px}
+.contact dl{grid-template-columns:1fr;gap:0}
+.contact dt{margin-top:12px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#domov">Shoti <span>pros</span></a>
+    <details class="menu"><summary>Meni</summary>
+    <nav aria-label="Glavni meni">
+      <a href="#domov" aria-current="page">Domov</a>
+      <a href="#o-nas">O nas</a>
+      <a href="#storitve">Storitve</a>
+      <a href="#novice">Novice</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav></details>
+  </div>
+</header>
+
+<main>
+  <div class="page" data-page="domov">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Igre <em>ustvarjamo.</em> Igre živimo.</h1>
+      <p>Skupina gejmerjev, ki razvijamo svoje videoigre in jih sproti igramo v živo na Twitchu.</p>
+      <a class="btn" href="#storitve">Kaj počnemo</a>
+      <a class="btn alt" href="#kontakt">Piši nam</a>
+    </div>
+    <svg class="pad" viewBox="0 0 420 260" aria-hidden="true">
+      <path d="M110 40h200c40 0 70 30 90 110l10 50c8 38-30 50-55 26l-45-40H130l-45 40c-25 24-63 12-55-26l10-50C60 70 70 40 110 40Z" fill="#7a3cff"/>
+      <rect x="85" y="95" width="60" height="16" rx="4" fill="#0d0b1a"/><rect x="107" y="73" width="16" height="60" rx="4" fill="#0d0b1a"/>
+      <circle cx="300" cy="85" r="12" fill="#b6ff3b"/><circle cx="335" cy="112" r="12" fill="#0d0b1a"/><circle cx="300" cy="139" r="12" fill="#0d0b1a"/><circle cx="265" cy="112" r="12" fill="#0d0b1a"/>
+    </svg>
+  </div>
+  <section class="intro">
+    <div class="wrap">
+      <h2>O nas</h2>
+      <p>Shoti pros smo prijatelji, ki nas druži ljubezen do iger.</p>
+      <a class="btn" href="#o-nas">Več o nas</a>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" data-page="o-nas">
+  <section class="intro">
+    <div class="wrap">
+      <h2>O nas</h2>
+      <p>Shoti pros smo prijatelji, ki nas druži ljubezen do iger. V prostem času oblikujemo lastne manjše igre, prek spleta pa vsak teden igramo in se pogovarjamo z gledalci. Vsak, ki rad igra, je dobrodošel.</p>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" data-page="storitve">
+  <section>
+    <div class="wrap wide">
+      <h2>Kaj počnemo</h2>
+      <div class="cards">
+        <div class="card" tabindex="0">
+          <h3>Naše igre</h3>
+          <p>Razvijamo preproste videoigre, ki jih lahko preizkusiš kar v brskalniku.</p>
+          <div class="more"><div><p>Vsaka igra nastane v nekaj tednih. Vmes objavljamo različice, ki jih lahko preizkusiš in nam poveš mnenje.</p></div></div>
+        </div>
+        <div class="card" tabindex="0">
+          <h3>Stream na Twitchu</h3>
+          <p>Igramo v živo, testiramo svoje igre in se zabavamo skupaj z gledalci.</p>
+          <div class="more"><div><p>Stream je trikrat tedensko zvečer. Gledalci z glasovanjem odločajo, kaj bomo igrali naslednje.</p></div></div>
+        </div>
+        <div class="card" tabindex="0">
+          <h3>Skupnost</h3>
+          <p>Prostor za pogovor, turnirje in ideje za nove igre.</p>
+          <div class="more"><div><p>Vsak mesec pripravimo prijateljski turnir. Pridružiš se lahko prek povezave do skupnosti.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" data-page="novice">
+  <section>
+    <div class="wrap">
+      <h2>Novice</h2>
+      <div class="news">
+        <article class="post featured" tabindex="0">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <div class="meta"><span class="tag">Stream</span><time datetime="2026-10-24">24. 10. 2026</time></div>
+            <h3>Prvi veliki turnir v naši igri</h3>
+            <p>Prihodnji petek ob 20.00 gostimo odprt turnir. Vpiše se lahko kdor koli, igralci pa se bodo pomerili v neposrednem prenosu na Twitchu.</p>
+            <span class="go">Preberi več →</span>
+          </div>
+        </article>
+        <article class="post" tabindex="0">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <div class="meta"><span class="tag">Igre</span><time datetime="2026-10-15">15. 10. 2026</time></div>
+            <h3>Nova različica igre je na voljo</h3>
+            <p>Dodali smo dve novi stopnji in popravili nekaj napak, ki ste jih opazili.</p>
+            <span class="go">Preberi več →</span>
+          </div>
+        </article>
+        <article class="post" tabindex="0">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <div class="meta"><span class="tag">Skupnost</span><time datetime="2026-10-02">2. 10. 2026</time></div>
+            <h3>Iščemo preizkuševalce</h3>
+            <p>Pridruži se testiranju in nam pomagaj izboljšati naslednjo igro.</p>
+            <span class="go">Preberi več →</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" data-page="kontakt">
+  <section class="contact">
+    <div class="wrap">
+      <h2>Kontakt</h2>
+      <dl>
+        <dt>E-pošta</dt><dd>info@primer.si</dd>
+        <dt>Twitch</dt><dd>twitch.tv/primer</dd>
+        <dt>Skupnost</dt><dd>povezava do skupnosti</dd>
+        <dt>Stream</dt><dd>pon, sre, pet zvečer</dd>
+      </dl>
+      <a class="btn" href="mailto:info@primer.si">Pošlji sporočilo</a>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer><div class="wrap">© 2026 Shoti pros. Izmišljeni podatki za prototip.</div></footer>
+<script>
+(function(){var d=document.querySelector('.menu'),mq=window.matchMedia('(min-width:601px)');
+function sync(){d.open=mq.matches}
+sync();mq.addEventListener('change',sync);
+d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(!mq.matches)d.open=false})});
+var pages=document.querySelectorAll('.page'),links=document.querySelectorAll('nav a'),names=[].map.call(pages,function(p){return p.dataset.page});
+function show(){var h=location.hash.slice(1);if(names.indexOf(h)<0)h='domov';
+pages.forEach(function(p){p.classList.toggle('active',p.dataset.page===h)});
+links.forEach(function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+window.scrollTo(0,0)}
+show();window.addEventListener('hashchange',show);})();
+</script>
+</body>
+</html>
